@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>To-Do List App</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+</head>
+
+<body>
+
+    <div class="todo-container">
+
+        <h1>My To-Do List</h1>
+
+
+        <!-- DARK MODE -->
+        <button
+            id="darkModeBtn"
+            class="dark-mode-btn"
+        >
+            🌙 Dark Mode
+        </button>
+
+
+        <!-- SEARCH -->
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search tasks..."
+        >
+
+
+        <!-- DUE DATE -->
+        <input
+            type="date"
+            id="taskDate"
+        >
+
+
+        <!-- PRIORITY -->
+        <select id="taskPriority">
+
+            <option value="medium">
+                Medium Priority
+            </option>
+
+            <option value="high">
+                High Priority
+            </option>
+
+            <option value="low">
+                Low Priority
+            </option>
+
+        </select>
+
+
+        <!-- CATEGORY -->
+        <select id="taskCategory">
+
+            <option value="personal">
+                Personal
+            </option>
+
+            <option value="work">
+                Work
+            </option>
+
+            <option value="study">
+                Study
+            </option>
+
+            <option value="shopping">
+                Shopping
+            </option>
+
+        </select>
+
+
+        <!-- TASK NOTES -->
+        <textarea
+            id="taskNotes"
+            placeholder="Add task notes..."
+            rows="3"
+        ></textarea>
+
+
+        <!-- TASK FILTERS -->
+        <div class="task-filters">
+
+            <button id="allTasksBtn">
+                All
+            </button>
+
+            <button id="activeTasksBtn">
+                Active
+            </button>
+
+            <button id="completedTasksBtn">
+                Completed
+            </button>
+
+        </div>
+
+
+        <!-- CLEAR ALL -->
+        <button
+            id="clearAllBtn"
+            class="clear-all-btn"
+        >
+            Clear All Tasks
+        </button>
+<div class="backup-buttons">
+    <button id="exportTasksBtn" class="backup-btn">
+        📥 Export Tasks
+    </button>
+
+    <button id="importTasksBtn" class="backup-btn">
+        📤 Import Tasks
+    </button>
+
+    <input
+        type="file"
+        id="importFileInput"
+        accept=".json"
+        style="display: none;"
+    >
+</div>
+
+        <!-- PRIORITY FILTER -->
+        <select id="priorityFilter">
+
+            <option value="all">
+                All Priorities
+            </option>
+
+            <option value="high">
+                High Priority
+            </option>
+
+            <option value="medium">
+                Medium Priority
+            </option>
+
+            <option value="low">
+                Low Priority
+            </option>
+
+        </select>
+
+
+        <!-- ADD TASK -->
+        <div class="input-section">
+
+            <input
+                type="text"
+                id="taskInput"
+                placeholder="Enter a task..."
+            >
+
+            <button id="addTaskBtn">
+                Add Task
+            </button>
+
+        </div>
+
+
+        <!-- STATISTICS -->
+        <div class="task-stats">
+
+            <span>
+                Total:
+                <strong id="totalTasks">0</strong>
+            </span>
+
+            <span>
+                Active:
+                <strong id="activeTasks">0</strong>
+            </span>
+
+            <span>
+                Completed:
+                <strong id="completedTasks">0</strong>
+            </span>
+
+            <span>
+                Progress:
+                <strong id="progressPercentage">
+                    0%
+                </strong>
+            </span>
+
+        </div>
+
+
+        <!-- PROGRESS -->
+        <div class="progress-container">
+
+            <div class="progress-header">
+
+                <span>
+                    Task Progress
+                </span>
+
+                <strong id="progressText">
+                    0%
+                </strong>
+
+            </div>
+
+            <div class="progress-bar">
+
+                <div
+                    id="progressFill"
+                    class="progress-fill"
+                ></div>
+
+            </div>
+
+        </div>
+<div class="task-breakdown">
+    <h3>Task Breakdown</h3>
+
+    <div class="breakdown-bar">
+        <div id="completedBar" class="completed-bar"></div>
+        <div id="activeBar" class="active-bar"></div>
+    </div>
+
+    <div class="breakdown-info">
+        <span id="completedSummary">Completed: 0%</span>
+        <span id="activeSummary">Active: 0%</span>
+    </div>
+</div>
+
+        <!-- TASK LIST -->
+        <ul id="taskList"></ul>
+
+
+        <!-- EDIT MODAL -->
+        <div
+            id="editModal"
+            class="edit-modal"
+        >
+
+            <div class="edit-modal-content">
+
+                <h3>
+                    Edit Task
+                </h3>
+
+
+                <input
+                    type="text"
+                    id="editTaskInput"
+                    placeholder="Task name"
+                >
+
+
+                <input
+                    type="date"
+                    id="editTaskDate"
+                >
+
+
+                <select id="editTaskPriority">
+
+                    <option value="medium">
+                        Medium Priority
+                    </option>
+
+                    <option value="high">
+                        High Priority
+                    </option>
+
+                    <option value="low">
+                        Low Priority
+                    </option>
+
+                </select>
+
+
+                <select id="editTaskCategory">
+
+                    <option value="personal">
+                        Personal
+                    </option>
+
+                    <option value="work">
+                        Work
+                    </option>
+
+                    <option value="study">
+                        Study
+                    </option>
+
+                    <option value="shopping">
+                        Shopping
+                    </option>
+
+                </select>
+
+
+                <!-- EDIT NOTES -->
+                <textarea
+                    id="editTaskNotes"
+                    placeholder="Task notes..."
+                    rows="4"
+                ></textarea>
+
+
+                <div class="edit-modal-buttons">
+
+                    <button id="saveEditBtn">
+                        Save Changes
+                    </button>
+
+                    <button id="cancelEditBtn">
+                        Cancel
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
